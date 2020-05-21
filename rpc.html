@@ -1,12 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>RPC</title>
+<title>RPC</title>
 </head>
 <body>
-  <script>
+  
+    <script>  
+    // randoms the computers choice
+        function computerPlay(){
+            const computerChoice = ["Rock", "Paper", "Scissors"]
+            var random = Math.floor(Math.random()*3);
+        let choice = computerChoice[random];
+        
+        return choice;
+    
+        }
+            // player choice. Takes which ever characters the player enters and capitalises the first letter with the rest lowercase. If not valid returns an Oops!
+        function playerChoice(){
+            let playerEnter = prompt('Shoot! Rock, paper or scissors. Type your choice!')
+            playerPlay = playerEnter.toUpperCase().slice(0,1) + playerEnter.slice(1).toLowerCase();
+            if (playerPlay === "Rock" || playerPlay === 'Paper' || playerPlay === 'Scissors'){return playerPlay}
+            else{alert('Oops! Please type your answer correctly. "Rock" "Paper" or "Scissors"')}
+           
+        }
+    // firstTo lets the game play until either player wins x amount of games. i did this because i couldnt figure out a way for it NOT to count a game/loop when a wrong entry was typed (eg adfsd instead of rock)
+let computerScore = 0
+, playerScore = 0
+, gameNumber = 0
+, firstTo = 2
 
-  </script>
+
+        function playRound(playerSelection,computerSelection){
+        if ( (playerSelection == "Rock" && computerSelection =="Paper") || (playerSelection == "Paper" && computerSelection =="Scissors") || (playerSelection =="Scissors" && computerSelection =="Rock"))
+                {alert(`You Lose! ${computerSelection} beats ${playerSelection}`)
+                return `game: ${++gameNumber}
+                You Lose! ${computerSelection} beats ${playerSelection}. 
+                Player score = ${playerScore}
+                Computer score = ${++computerScore}`}
+        else if ( (playerSelection == "Rock" && computerSelection =="Scissors") || (playerSelection == "Paper" && computerSelection =="Rock") || (playerSelection =="Scissors" && computerSelection =="Paper"))
+                {alert(`You Win! ${playerSelection} beats ${computerSelection}`) 
+                return `game: ${++gameNumber}
+                You Win! ${playerSelection} beats ${computerSelection} 
+                Player score = ${++playerScore}
+                Computer score = ${computerScore}`}
+        else if (playerSelection == computerSelection){alert (`It's a draw! ${computerSelection} and ${playerSelection} cancel eachother out`)
+                return `game: ${++gameNumber}
+                It's a draw! ${computerSelection} and ${playerSelection} cancel eachother out
+                Player score = ${playerScore}
+                Computer score = ${computerScore}`}  
+        else {return `Error, wrong entry, try again.
+                Player score = ${playerScore}
+                Computer score = ${computerScore}`}
+
+
+            }
+        // for statement looping until player or computer is scre equals the firstTo option
+            const game =()=>{
+                for(let i = 0; ; i++){
+                    console.log(playRound(playerSelection(), computerSelection()));
+                    if (playerScore === firstTo || computerScore === firstTo){
+                        if (playerScore > computerScore){return `Game over. You Win! 
+                            You scored: ${playerScore} 
+                            Computer scored: ${computerScore}`}
+                        else if (playerScore === computerScore){return `Game over. Its a Draw! 
+                            You scored: ${playerScore}
+                            Computer scored: ${computerScore}`} 
+                        else {return `Game over. Unfortunatly you lost. Better luck next time 
+                            You scored: ${playerScore}
+                            Computer scored: ${computerScore}`}
+                    }
+                    
+                }
+            }
+
+        const playerSelection = playerChoice
+        const computerSelection = computerPlay
+        console.log(game())
+
+
+    </script>
 </body>
 </html>
